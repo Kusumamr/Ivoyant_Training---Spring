@@ -1,10 +1,14 @@
 package org.example;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+
+import java.io.IOException;
 
 @Controller
 public class StudentController {
@@ -16,7 +20,12 @@ public class StudentController {
     }
 
     @PostMapping("/register")
-    public String registerStudent(@ModelAttribute Student student,Model model){
+    public String registerStudent(@Valid  @ModelAttribute Student student,BindingResult result, Model model)
+                                throws IOException {
+
+        if(result.hasErrors()){
+            return "student-form";
+        }
         System.out.println(student.getId());
         System.out.println(student.getName());
         System.out.println(student.getCourse());

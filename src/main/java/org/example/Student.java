@@ -1,8 +1,17 @@
 package org.example;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Student {
+
+    @NotNull(message = "ID is required")
     private int id;
+
+    @NotBlank(message = "name cannot be empty")
     private String name;
+
+    @NotBlank(message = "course cannot be empty")
     private String course;
 
     public Student(){
